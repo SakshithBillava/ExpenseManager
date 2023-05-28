@@ -1,7 +1,10 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-from bokeh.plotting import figure
+try:
+    from bokeh.plotting import figure
+except ModuleNotFoundError as e:
+    pass
 import streamlit_authenticator as stauth
 import pymongo
 import database as dbase
