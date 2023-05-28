@@ -1,18 +1,20 @@
-import streamlit as st
-import pandas as pd
-import numpy as np
-from bokeh.plotting import figure
-import streamlit_authenticator as stauth
-import pymongo
-import database as dbase
-import updation as upd
-from PIL import Image
-from streamlit_option_menu import option_menu
-from streamlit_custom_notification_box import custom_notification_box as scnb
-import matplotlib.pyplot as plt
-import plotly.express as px
-import seaborn as sns 
-
+try:
+    import streamlit as st
+    import pandas as pd
+    import numpy as np
+    from bokeh.plotting import figure
+    import streamlit_authenticator as stauth
+    import pymongo
+    import database as dbase
+    import updation as upd
+    from PIL import Image
+    from streamlit_option_menu import option_menu
+    from streamlit_custom_notification_box import custom_notification_box as scnb
+    import matplotlib.pyplot as plt
+    import plotly.express as px
+    import seaborn as sns 
+except ModuleNotFoundError as e:
+    pass
 
 original_title = '<p style="font-family:Bodoni MT Black; color:white; font-size: 60px;">EXPENSE MANAGER</p>'
 st.markdown(original_title,unsafe_allow_html=True)
