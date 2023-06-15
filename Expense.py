@@ -262,12 +262,15 @@ if "click" not in st.session_state:
 if "goOn" not in st.session_state:
     st.session_state.goOn = False
 
+if "display_commit_button" not in st.session_state:
+    st.session_state.display_commit_button = False
+
 def callback():
     st.session_state.click = True
 
-
 def Commit():
     st.session_state.click = False
+    st.session_state.display_commit_button = True
     st.session_state.confirm = True
     if(st.session_state.confirm):
         collection3.insert_one(st.session_state.item)
@@ -295,6 +298,8 @@ if "proceed_with_user_expense_data" not in st.session_state:
     st.session_state.proceed_with_user_expense_data = False
 
 if(st.session_state.authentication_status==True and st.session_state.selected =="Home" ):
+    logo = Image.open("LOGO.png")
+    st.image(logo)
     if(st.button("CLICK HERE TO ADD YOUR EXPENSE OR INCOME",on_click=callback) or st.session_state.click):
         st.button("CANCEL",on_click=cancel_clicked)
         options = ["Income","Expenditure"]
@@ -335,6 +340,9 @@ if(st.session_state.authentication_status==True and st.session_state.selected ==
             }
 
         st.button("CONFIRM",on_click=Commit)
+    if(st.session_state.display_commit_button):
+        st.button("COMMIT THE CHANGES")
+        st.session_state.display_commit_button = False
 
 def done():
     if(st.session_state.option==0):
@@ -440,7 +448,8 @@ try:
         cols = st.columns([1, 1])
         with cols[0]:
             fig1 = px.pie(values=sizes,names=labels,hover_name=labels)
-            fig1.update_layout(margin = dict(l=1,r=1,b=1,t=1),width=400,height=400 ,font=dict(color='#383635',size=15))
+            fig1.update_layout(margin = dict(l=1,r=1,b=1,t=1),width=350,height=350 ,font=dict(color='#383635',size=15))
+            fig1.update_layout(legend=dict(orientation="h"),)
             st.write(fig1)
 
         with cols[1]:
@@ -449,7 +458,6 @@ try:
             chart_data = pd.DataFrame(
             np.array(ll),
             columns=labels)
-
             st.bar_chart(chart_data)
 
         dict_of_items = {}
